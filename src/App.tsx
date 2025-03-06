@@ -18,8 +18,8 @@ function App() {
 
   useEffect(() => {
     setShopifyAccess({
-      shopDomain: "cometicti.myshopify.com",
-      accessToken: "5cd5d06e253d551c46f99b8de1d1c048",
+      shopDomain: import.meta.env.VITE_SHOPIFY_DOMAIN,
+      accessToken: import.meta.env.VITE_SHOPIFY_ACCESS_TOKEN,
     });
     loadCartFromStorage();
   }, [setShopifyAccess, loadCartFromStorage]);
