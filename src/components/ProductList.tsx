@@ -139,11 +139,14 @@ export const ProductList = () => {
 
   return (
     <div className="w-full min-h-screen pt-24 pb-20 flex flex-col">
-      <div className="px-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold font-neue">All Products</h1>
+      <div className="px-4 md:px-8">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold font-neue">
+            All Products
+          </h1>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col md:flex-row gap-4">
             {/* Search Input */}
             <input
               type="text"
@@ -152,38 +155,40 @@ export const ProductList = () => {
               onChange={(e) =>
                 setFilters((prev) => ({ ...prev, search: e.target.value }))
               }
-              className="px-4 py-2 border rounded-lg w-64"
+              className="w-full md:w-64 px-4 py-2 border rounded-lg"
             />
 
-            {/* Sort Dropdown */}
-            <select
-              value={`${filters.sort.key}_${
-                filters.sort.reverse ? "DESC" : "ASC"
-              }`}
-              onChange={(e) => handleSortChange(e.target.value)}
-              className="px-4 py-2 border rounded-lg"
-            >
-              <option value="TITLE_ASC">Name (A-Z)</option>
-              <option value="TITLE_DESC">Name (Z-A)</option>
-              <option value="PRICE_ASC">Price (Low to High)</option>
-              <option value="PRICE_DESC">Price (High to Low)</option>
-            </select>
+            <div className="flex gap-2">
+              {/* Sort Dropdown */}
+              <select
+                value={`${filters.sort.key}_${
+                  filters.sort.reverse ? "DESC" : "ASC"
+                }`}
+                onChange={(e) => handleSortChange(e.target.value)}
+                className="flex-1 md:flex-none px-4 py-2 border rounded-lg"
+              >
+                <option value="TITLE_ASC">Name (A-Z)</option>
+                <option value="TITLE_DESC">Name (Z-A)</option>
+                <option value="PRICE_ASC">Price (Low to High)</option>
+                <option value="PRICE_DESC">Price (High to Low)</option>
+              </select>
 
-            {/* Filter Button */}
-            <button
-              onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className="flex items-center gap-2 px-4 py-2 border rounded-lg"
-            >
-              <FunnelSimple size={20} />
-              Filters
-            </button>
+              {/* Filter Button */}
+              <button
+                onClick={() => setIsFilterOpen(!isFilterOpen)}
+                className="flex items-center justify-center gap-2 px-4 py-2 border rounded-lg min-w-[100px]"
+              >
+                <FunnelSimple size={20} />
+                <span className="hidden md:inline">Filters</span>
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Filter Panel */}
         {isFilterOpen && (
           <div className="mb-8 p-4 border rounded-lg">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Type Filter */}
               <div>
                 <label className="block mb-2 text-sm font-medium">
@@ -227,8 +232,8 @@ export const ProductList = () => {
           </div>
         )}
 
-        {/* Products Grid with Loading State */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-h-[800px]">
+        {/* Products Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {loading
             ? // Loading skeleton
               Array(8)
@@ -247,11 +252,11 @@ export const ProductList = () => {
 
         {/* Load More Button */}
         {hasMore && (
-          <div className="mt-12 text-center">
+          <div className="mt-8 md:mt-12 text-center">
             <button
               onClick={() => fetchProducts(endCursor)}
               disabled={loading}
-              className="px-8 py-3 bg-black text-white rounded-lg hover:bg-gray-900 transition-colors"
+              className="w-full md:w-auto px-8 py-3 bg-black text-white rounded-lg hover:bg-gray-900 transition-colors"
             >
               {loading ? "Loading..." : "Load More"}
             </button>
