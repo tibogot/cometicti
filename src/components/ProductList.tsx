@@ -27,6 +27,7 @@ export const ProductList = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [productTypes, setProductTypes] = useState<string[]>([]);
   const [vendors, setVendors] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const handleSortChange = (value: string) => {
     switch (value) {
@@ -56,6 +57,7 @@ export const ProductList = () => {
     try {
       setLoading(true);
       let query = "";
+      if (searchQuery) query += `title:*${searchQuery}* `;
       if (selectedType) query += `product_type:${selectedType} `;
       if (selectedVendor) query += `vendor:${selectedVendor} `;
 
@@ -105,7 +107,7 @@ export const ProductList = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, [shopifyAccess, selectedType, selectedVendor, sortConfig]);
+  }, [shopifyAccess, selectedType, selectedVendor, sortConfig, searchQuery]);
 
   useEffect(() => {
     fetchFilters();
@@ -118,6 +120,15 @@ export const ProductList = () => {
           <h1 className="text-4xl font-bold font-neue">All Products</h1>
 
           <div className="flex items-center gap-4">
+            {/* Search Input */}
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="px-4 py-2 border rounded-lg w-64"
+            />
+
             {/* Sort Dropdown */}
             <select
               value={`${sortConfig.key}_${sortConfig.reverse ? "DESC" : "ASC"}`}

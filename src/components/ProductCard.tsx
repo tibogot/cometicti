@@ -6,16 +6,23 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
+  const isGLB = product.images[0]?.src.endsWith(".glb");
+
   return (
     <Link to={`/product/${product.handle}`} className="group w-full">
       <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-4">
-        {product.images[0] && (
-          <img
-            src={product.images[0].src}
-            alt={product.images[0].altText || product.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-        )}
+        {product.images[0] &&
+          (isGLB ? (
+            <div className="w-full h-full flex items-center justify-center">
+              <span className="text-gray-500">3D Model Available</span>
+            </div>
+          ) : (
+            <img
+              src={product.images[0].src}
+              alt={product.images[0].altText || product.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+          ))}
       </div>
       <div className="p-4">
         <h2 className="text-base md:text-lg font-semibold text-gray-800 truncate">
