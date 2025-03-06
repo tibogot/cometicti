@@ -34,13 +34,16 @@ export const HomePage = () => {
   return (
     <div className="w-full flex flex-col">
       <section
-        className="relative w-full flex-shrink-0"
+        className="relative w-full flex-shrink-0 bg-gray-900" // Added background color
         style={{ height: "calc(100svh - 4rem)" }} // Updated: subtract navbar (4rem)
       >
         <img
           src="/heroimg.avif"
           alt="Hero"
+          loading="eager"
+          fetchPriority="high"
           className="absolute inset-0 w-full h-full object-cover"
+          style={{ willChange: "transform" }} // Optimize performance
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
         <div className="absolute bottom-0 w-full">

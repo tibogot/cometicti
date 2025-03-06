@@ -102,21 +102,53 @@ export const ProductPage = () => {
     return Boolean(variant?.available);
   };
 
-  if (error) return <div className="p-4 text-red-500">{error}</div>;
-  if (!product) return <div className="p-4">Loading...</div>;
-
   const { colors, sizes } = getVariantOptions();
+
+  if (error) return <div className="p-4 text-red-500">{error}</div>;
+
+  // Improve loading state with proper height and layout
+  if (!product) {
+    return (
+      <div className="pt-24 pb-20">
+        <div className="mx-auto px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Loading skeleton */}
+            <div className="flex gap-4 h-[600px]">
+              <div className="w-24 space-y-2">
+                {[1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="w-24 h-24 bg-gray-200 rounded-lg animate-pulse"
+                  />
+                ))}
+              </div>
+              <div className="flex-1 aspect-square bg-gray-200 rounded-lg animate-pulse" />
+            </div>
+            <div className="space-y-6">
+              <div className="h-10 bg-gray-200 rounded w-3/4 animate-pulse" />
+              <div className="h-8 bg-gray-200 rounded w-1/4 animate-pulse" />
+              <div className="space-y-4">
+                <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                <div className="h-4 bg-gray-200 rounded w-2/3 animate-pulse" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="pt-24 pb-20">
       <div className="mx-auto px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Product Images Section */}
-          <div className="flex gap-4 h-fit select-none ">
+          <div className="flex gap-4 h-fit">
             {/* Thumbnail Images */}
-            {!product?.images[0]?.src.endsWith(".glb") && (
+            {!product.images[0]?.src.endsWith(".glb") && (
               <div className="flex flex-col gap-2 select-none">
-                {product?.images.map((image, index) => (
+                {product.images.map((image, index) => (
                   <button
                     key={image.id}
                     onClick={() => setSelectedImage(index)}
@@ -153,7 +185,7 @@ export const ProductPage = () => {
           </div>
 
           {/* Product Details Section */}
-          <div className="flex flex-col">
+          <div className="flex flex-col min-h-[600px]">
             <h1 className="text-4xl font-bold font-neue mb-4">
               {product.title}
             </h1>
