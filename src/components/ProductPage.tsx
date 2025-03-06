@@ -144,32 +144,9 @@ export const ProductPage = () => {
       <div className="mx-auto px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Product Images Section */}
-          <div className="flex gap-4 h-fit select-none">
-            {/* Thumbnail Images */}
-            {!product.images[0]?.src.endsWith(".glb") && (
-              <div className="flex flex-col gap-2 select-none">
-                {product.images.map((image, index) => (
-                  <button
-                    key={image.id}
-                    onClick={() => setSelectedImage(index)}
-                    className={`w-24 h-24 rounded-lg overflow-hidden border-2 transition-colors bg-white ${
-                      selectedImage === index
-                        ? "border-black"
-                        : "border-transparent hover:border-gray-300"
-                    }`}
-                  >
-                    <img
-                      src={image.src}
-                      alt={image.altText || `Product view ${index + 1}`}
-                      className="w-full h-full object-cover "
-                    />
-                  </button>
-                ))}
-              </div>
-            )}
-
+          <div className="flex flex-col md:flex-row gap-4 h-fit select-none">
             {/* Main Image/Model */}
-            <div className="h-auto aspect-square bg-gray-100 rounded-lg overflow-hidden">
+            <div className="order-1 md:order-2 h-auto aspect-square bg-gray-100 rounded-lg overflow-hidden flex-1">
               {product?.images[0]?.src.endsWith(".glb") ? (
                 <ModelViewer url={product.images[0].src} />
               ) : (
@@ -182,6 +159,29 @@ export const ProductPage = () => {
                 />
               )}
             </div>
+
+            {/* Thumbnail Images */}
+            {!product?.images[0]?.src.endsWith(".glb") && (
+              <div className="order-2 md:order-1 flex flex-row md:flex-col gap-2 overflow-auto select-none">
+                {product?.images.map((image, index) => (
+                  <button
+                    key={image.id}
+                    onClick={() => setSelectedImage(index)}
+                    className={`flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden border-2 transition-colors bg-white ${
+                      selectedImage === index
+                        ? "border-black"
+                        : "border-transparent hover:border-gray-300"
+                    }`}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.altText || `Product view ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Product Details Section */}
