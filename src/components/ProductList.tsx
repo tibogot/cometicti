@@ -5,10 +5,17 @@ import { useStore } from "../store/useStore";
 import { ProductCard } from "./ProductCard";
 import { FunnelSimple } from "@phosphor-icons/react";
 
-type SortOption = {
-  key: "TITLE" | "PRICE";
-  reverse: boolean;
-};
+type SortKey = "TITLE" | "PRICE";
+
+interface Filters {
+  type: string;
+  vendor: string;
+  search: string;
+  sort: {
+    key: SortKey;
+    reverse: boolean;
+  };
+}
 
 export const ProductList = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -16,32 +23,46 @@ export const ProductList = () => {
   const [hasMore, setHasMore] = useState(false);
   const [endCursor, setEndCursor] = useState<string | undefined>(undefined);
   const shopifyAccess = useStore((state) => state.shopifyAccess);
-
-  // Filter states
-  const [selectedType, setSelectedType] = useState<string>("");
-  const [selectedVendor, setSelectedVendor] = useState<string>("");
-  const [sortConfig, setSortConfig] = useState<SortOption>({
-    key: "TITLE",
-    reverse: false,
-  });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [productTypes, setProductTypes] = useState<string[]>([]);
   const [vendors, setVendors] = useState<string[]>([]);
-  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  // Combine filter states into a single object
+  const [filters, setFilters] = useState<Filters>({
+    type: "",
+    vendor: "",
+    search: "",
+    sort: {
+      key: "TITLE",
+      reverse: false,
+    },
+  });
 
   const handleSortChange = (value: string) => {
     switch (value) {
       case "TITLE_ASC":
-        setSortConfig({ key: "TITLE", reverse: false });
+        setFilters((prev) => ({
+          ...prev,
+          sort: { key: "TITLE", reverse: false },
+        }));
         break;
       case "TITLE_DESC":
-        setSortConfig({ key: "TITLE", reverse: true });
+        setFilters((prev) => ({
+          ...prev,
+          sort: { key: "TITLE", reverse: true },
+        }));
         break;
       case "PRICE_ASC":
-        setSortConfig({ key: "PRICE", reverse: false });
+        setFilters((prev) => ({
+          ...prev,
+          sort: { key: "PRICE", reverse: false },
+        }));
         break;
       case "PRICE_DESC":
-        setSortConfig({ key: "PRICE", reverse: true });
+        setFilters((prev) => ({
+          ...prev,
+          sort: { key: "PRICE", reverse: true },
+        }));
         break;
     }
   };
@@ -56,16 +77,19 @@ export const ProductList = () => {
 
     try {
       setLoading(true);
-      let query = "";
-      if (searchQuery) query += `title:*${searchQuery}* `;
-      if (selectedType) query += `product_type:${selectedType} `;
-      if (selectedVendor) query += `vendor:${selectedVendor} `;
+      const query = [
+        filters.search && `title:*${filters.search}*`,
+        filters.type && `product_type:${filters.type}`,
+        filters.vendor && `vendor:${filters.vendor}`,
+      ]
+        .filter(Boolean)
+        .join(" ");
 
       const response = await client.getAllProducts({
         first: 12,
         after: cursor,
-        sortKey: sortConfig.key,
-        reverse: sortConfig.reverse,
+        sortKey: filters.sort.key,
+        reverse: filters.sort.reverse,
         query: query.trim() || undefined,
       });
 
@@ -107,7 +131,7 @@ export const ProductList = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, [shopifyAccess, selectedType, selectedVendor, sortConfig, searchQuery]);
+  }, [shopifyAccess, filters]);
 
   useEffect(() => {
     fetchFilters();
@@ -124,14 +148,18 @@ export const ProductList = () => {
             <input
               type="text"
               placeholder="Search products..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              value={filters.search}
+              onChange={(e) =>
+                setFilters((prev) => ({ ...prev, search: e.target.value }))
+              }
               className="px-4 py-2 border rounded-lg w-64"
             />
 
             {/* Sort Dropdown */}
             <select
-              value={`${sortConfig.key}_${sortConfig.reverse ? "DESC" : "ASC"}`}
+              value={`${filters.sort.key}_${
+                filters.sort.reverse ? "DESC" : "ASC"
+              }`}
               onChange={(e) => handleSortChange(e.target.value)}
               className="px-4 py-2 border rounded-lg"
             >
@@ -162,8 +190,10 @@ export const ProductList = () => {
                   Product Type
                 </label>
                 <select
-                  value={selectedType}
-                  onChange={(e) => setSelectedType(e.target.value)}
+                  value={filters.type}
+                  onChange={(e) =>
+                    setFilters((prev) => ({ ...prev, type: e.target.value }))
+                  }
                   className="w-full px-4 py-2 border rounded-lg"
                 >
                   <option value="">All Types</option>
@@ -179,8 +209,10 @@ export const ProductList = () => {
               <div>
                 <label className="block mb-2 text-sm font-medium">Vendor</label>
                 <select
-                  value={selectedVendor}
-                  onChange={(e) => setSelectedVendor(e.target.value)}
+                  value={filters.vendor}
+                  onChange={(e) =>
+                    setFilters((prev) => ({ ...prev, vendor: e.target.value }))
+                  }
                   className="w-full px-4 py-2 border rounded-lg"
                 >
                   <option value="">All Vendors</option>

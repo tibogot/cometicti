@@ -19,6 +19,22 @@ export const Nav = () => {
     setIsMenuOpen(false);
   };
 
+  const linkClass = (path: string) => `
+    text-lg ${location.pathname === path ? "text-white" : "text-white/80"}
+    hover:text-white transition-colors
+  `;
+
+  const mobileMenuClass = `
+    fixed inset-0 bg-black/95 z-50 md:hidden
+    flex flex-col items-center justify-center gap-8
+    transition-all duration-300
+    ${
+      isMenuOpen
+        ? "opacity-100 pointer-events-auto translate-x-0"
+        : "opacity-0 pointer-events-none translate-x-full"
+    }
+  `;
+
   return (
     <header
       className="sticky top-0 z-50 w-full bg-black"
@@ -36,30 +52,20 @@ export const Nav = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8 select-none">
-            <Link
-              to="/"
-              onClick={handleClick}
-              className={`text-lg ${
-                location.pathname === "/" ? "text-white" : "text-white/80"
-              } hover:text-white transition-colors`}
-            >
+            <Link to="/" onClick={handleClick} className={linkClass("/")}>
               Home
             </Link>
             <Link
               to="/shop"
               onClick={handleClick}
-              className={`text-lg ${
-                location.pathname === "/shop" ? "text-white" : "text-white/80"
-              } hover:text-white transition-colors`}
+              className={linkClass("/shop")}
             >
               Shop
             </Link>
             <Link
               to="/about"
               onClick={handleClick}
-              className={`text-lg ${
-                location.pathname === "/about" ? "text-white" : "text-white/80"
-              } hover:text-white transition-colors`}
+              className={linkClass("/about")}
             >
               About
             </Link>
@@ -89,17 +95,7 @@ export const Nav = () => {
           </button>
 
           {/* Mobile Menu Overlay */}
-          <div
-            className={`
-            fixed inset-0 bg-black/95 z-50 md:hidden flex flex-col items-center justify-center gap-8
-            transition-all duration-300
-            ${
-              isMenuOpen
-                ? "opacity-100 pointer-events-auto translate-x-0"
-                : "opacity-0 pointer-events-none translate-x-full"
-            }
-          `}
-          >
+          <div className={mobileMenuClass}>
             <button
               onClick={() => setIsMenuOpen(false)}
               className="absolute top-5 right-8 text-white/80 hover:text-white"
