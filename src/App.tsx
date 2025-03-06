@@ -26,9 +26,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="flex flex-col min-h-screen w-full relative">
+      <div className="flex flex-col min-h-screen">
         <Nav />
-        <main className="flex-auto w-full">
+        <main className="flex-1">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/shop" element={<ProductList />} />
@@ -37,9 +37,9 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <BackToTop />
         <CartDrawer />
         <CartBackdrop />
-        <BackToTop />
       </div>
     </BrowserRouter>
   );

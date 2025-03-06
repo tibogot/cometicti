@@ -32,9 +32,11 @@ export const HomePage = () => {
   }, [shopifyAccess]);
 
   return (
-    <div className="w-full min-h-screen flex flex-col">
-      {/* Hero Section */}
-      <section className="relative h-screen w-full flex-shrink-0">
+    <div className="w-full flex flex-col">
+      <section
+        className="relative w-full flex-shrink-0"
+        style={{ height: "calc(100vh - 4rem)" }} // Updated: subtract navbar (4rem)
+      >
         <img
           src="/heroimg.avif"
           alt="Hero"
@@ -43,8 +45,6 @@ export const HomePage = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
         <div className="absolute bottom-0 w-full">
           <div className="px-8 pb-12">
-            {" "}
-            {/* Changed container structure */}
             <h1 className="text-6xl font-bold text-white font-neue mb-4">
               Natural Beauty
             </h1>
@@ -54,19 +54,16 @@ export const HomePage = () => {
           </div>
         </div>
       </section>
-
-      {/* Featured Products Section */}
       <section className="w-full bg-white py-20 flex-grow">
         <div className="px-8">
-          {" "}
-          {/* Matching padding with hero section */}
           <h2 className="text-4xl font-bold mb-12 font-neue">
             Featured Products
           </h2>
-          <div className="grid grid-cols-3 gap-6 min-h-[400px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 min-h-[400px]">
+            {" "}
+            {/* Updated grid configuration */}
             {loading
-              ? // Loading skeleton
-                Array(3)
+              ? Array(3)
                   .fill(0)
                   .map((_, i) => (
                     <div key={i} className="animate-pulse">

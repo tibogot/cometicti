@@ -7,7 +7,7 @@ interface ProductCardProps {
 
 export const ProductCard = ({ product }: ProductCardProps) => {
   return (
-    <Link to={`/product/${product.handle}`} className="group">
+    <Link to={`/product/${product.handle}`} className="group w-full">
       <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-4">
         {product.images[0] && (
           <img
@@ -18,10 +18,12 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         )}
       </div>
       <div className="p-4">
-        <h2 className="text-lg font-semibold text-gray-800 truncate">
+        <h2 className="text-base md:text-lg font-semibold text-gray-800 truncate">
           {product.title}
         </h2>
-        <p className="text-xl font-bold text-blue-600">${product.price}</p>
+        <p className="text-lg md:text-xl font-bold text-blue-600">
+          ${product.price}
+        </p>
       </div>
     </Link>
   );
