@@ -29,11 +29,6 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow-x: hidden;
-}
-
-body {
-  overflow-y: auto;
 }
 
 #root {
@@ -41,7 +36,7 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  /* overflow-x: hidden; */
+  /* overflow-x: hidden was already commented out */
 }
 
 button {

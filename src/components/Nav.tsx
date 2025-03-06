@@ -14,6 +14,11 @@ export const Nav = () => {
     0
   );
 
+  const handleClick = () => {
+    window.scrollTo(0, 0);
+    setIsMenuOpen(false);
+  };
+
   return (
     <header
       className="sticky top-0 z-50 w-full bg-black"
@@ -21,7 +26,11 @@ export const Nav = () => {
     >
       <nav className="max-w-[2000px] mx-auto">
         <div className="h-16 px-4 flex items-center justify-between">
-          <Link to="/" className="text-2xl font-bold text-white select-none">
+          <Link
+            to="/"
+            onClick={handleClick}
+            className="text-2xl font-bold text-white select-none"
+          >
             COSMETIC
           </Link>
 
@@ -29,6 +38,7 @@ export const Nav = () => {
           <div className="hidden md:flex items-center gap-8 select-none">
             <Link
               to="/"
+              onClick={handleClick}
               className={`text-lg ${
                 location.pathname === "/" ? "text-white" : "text-white/80"
               } hover:text-white transition-colors`}
@@ -37,6 +47,7 @@ export const Nav = () => {
             </Link>
             <Link
               to="/shop"
+              onClick={handleClick}
               className={`text-lg ${
                 location.pathname === "/shop" ? "text-white" : "text-white/80"
               } hover:text-white transition-colors`}
@@ -45,6 +56,7 @@ export const Nav = () => {
             </Link>
             <Link
               to="/about"
+              onClick={handleClick}
               className={`text-lg ${
                 location.pathname === "/about" ? "text-white" : "text-white/80"
               } hover:text-white transition-colors`}
@@ -97,21 +109,21 @@ export const Nav = () => {
 
             <Link
               to="/"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={handleClick}
               className="text-2xl text-white/80 hover:text-white transition-colors select-none"
             >
               Home
             </Link>
             <Link
               to="/shop"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={handleClick}
               className="text-2xl text-white/80 hover:text-white transition-colors select-none"
             >
               Shop
             </Link>
             <Link
               to="/about"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={handleClick}
               className="text-2xl text-white/80 hover:text-white transition-colors select-none"
             >
               About

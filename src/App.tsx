@@ -10,6 +10,7 @@ import { CartBackdrop } from "./components/CartBackdrop";
 import { Footer } from "./components/Footer";
 import { AboutPage } from "./components/AboutPage";
 import { BackToTop } from "./components/BackToTop";
+import { ScrollToTop } from "./components/ScrollToTop";
 
 function App() {
   const setShopifyAccess = useStore((state) => state.setShopifyAccess);
@@ -17,9 +18,8 @@ function App() {
 
   useEffect(() => {
     setShopifyAccess({
-      // Update these values with your Shopify store credentials
-      shopDomain: "cometicti.myshopify.com", // Your store domain
-      accessToken: "5cd5d06e253d551c46f99b8de1d1c048", // Your Storefront API access token
+      shopDomain: "cometicti.myshopify.com",
+      accessToken: "5cd5d06e253d551c46f99b8de1d1c048",
     });
     loadCartFromStorage();
   }, [setShopifyAccess, loadCartFromStorage]);
@@ -27,6 +27,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="flex flex-col min-h-screen">
+        <ScrollToTop />
         <Nav />
         <main className="flex-1">
           <Routes>
