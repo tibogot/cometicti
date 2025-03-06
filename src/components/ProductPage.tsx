@@ -144,7 +144,7 @@ export const ProductPage = () => {
       <div className="mx-auto px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Product Images Section */}
-          <div className="flex gap-4 h-fit">
+          <div className="flex gap-4 h-fit select-none">
             {/* Thumbnail Images */}
             {!product.images[0]?.src.endsWith(".glb") && (
               <div className="flex flex-col gap-2 select-none">
@@ -161,7 +161,7 @@ export const ProductPage = () => {
                     <img
                       src={image.src}
                       alt={image.altText || `Product view ${index + 1}`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover "
                     />
                   </button>
                 ))}

@@ -4,8 +4,8 @@ export const AboutPage = () => {
       {/* Hero Section */}
       <section className="w-full relative h-[50vh] bg-gray-900 flex-shrink-0">
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-        <div className="absolute bottom-0 w-full p-12">
-          <div className="px-8">
+        <div className="absolute bottom-0 w-full p-8">
+          <div className="">
             <h1 className="text-6xl font-bold text-white font-neue mb-4">
               About Us
             </h1>
