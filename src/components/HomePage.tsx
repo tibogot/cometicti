@@ -35,7 +35,7 @@ export const HomePage = () => {
     <div className="w-full flex flex-col">
       <section
         className="relative w-full flex-shrink-0"
-        style={{ height: "calc(100vh - 4rem)" }} // Updated: subtract navbar (4rem)
+        style={{ height: "calc(100svh - 4rem)" }} // Updated: subtract navbar (4rem)
       >
         <img
           src="/heroimg.avif"
