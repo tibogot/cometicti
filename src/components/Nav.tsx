@@ -27,12 +27,8 @@ export const Nav = () => {
   const mobileMenuClass = `
     fixed inset-0 bg-black/95 z-50 md:hidden
     flex flex-col items-center justify-center gap-8
-    transition-all duration-300
-    ${
-      isMenuOpen
-        ? "opacity-100 pointer-events-auto translate-x-0"
-        : "opacity-0 pointer-events-none translate-x-full"
-    }
+    transition-transform duration-300
+    ${isMenuOpen ? "translate-x-0" : "translate-x-full"}
   `;
 
   return (
@@ -91,14 +87,14 @@ export const Nav = () => {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden text-white/80 hover:text-white transition-colors bg-transparent border-none"
           >
-            {isMenuOpen ? <X size={24} /> : <List size={24} />}
+            <List size={24} />
           </button>
 
           {/* Mobile Menu Overlay */}
           <div className={mobileMenuClass}>
             <button
               onClick={() => setIsMenuOpen(false)}
-              className="absolute top-5 right-8 text-white/80 hover:text-white"
+              className="absolute top-5 right-8 text-white hover:text-white/80 p-0 m-0 border-0 bg-transparent"
             >
               <X size={24} />
             </button>
