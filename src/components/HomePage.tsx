@@ -34,8 +34,8 @@ export const HomePage = () => {
   return (
     <div className="w-full flex flex-col">
       <section
-        className="relative w-full flex-shrink-0 bg-gray-900" // Added background color
-        style={{ height: "calc(100svh - 4rem)" }} // Updated: subtract navbar (4rem)
+        className="relative w-full flex-shrink-0 bg-gray-900"
+        style={{ height: "calc(100svh - 4rem)" }}
       >
         <img
           src="/heroimg.avif"
@@ -63,8 +63,6 @@ export const HomePage = () => {
             Featured Products
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 min-h-[400px]">
-            {" "}
-            {/* Updated grid configuration */}
             {loading
               ? Array(3)
                   .fill(0)

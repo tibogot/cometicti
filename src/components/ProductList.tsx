@@ -155,33 +155,15 @@ export const ProductList = () => {
               onChange={(e) =>
                 setFilters((prev) => ({ ...prev, search: e.target.value }))
               }
-              className="w-full md:w-64 px-4 py-2 border rounded-lg"
+              className="px-4 py-2 border rounded-lg"
             />
-
-            <div className="flex gap-2">
-              {/* Sort Dropdown */}
-              <select
-                value={`${filters.sort.key}_${
-                  filters.sort.reverse ? "DESC" : "ASC"
-                }`}
-                onChange={(e) => handleSortChange(e.target.value)}
-                className="flex-1 md:flex-none px-4 py-2 border rounded-lg"
-              >
-                <option value="TITLE_ASC">Name (A-Z)</option>
-                <option value="TITLE_DESC">Name (Z-A)</option>
-                <option value="PRICE_ASC">Price (Low to High)</option>
-                <option value="PRICE_DESC">Price (High to Low)</option>
-              </select>
-
-              {/* Filter Button */}
-              <button
-                onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className="flex items-center justify-center gap-2 px-4 py-2 border rounded-lg min-w-[100px]"
-              >
-                <FunnelSimple size={20} />
-                <span className="hidden md:inline">Filters</span>
-              </button>
-            </div>
+            <button
+              onClick={() => setIsFilterOpen(!isFilterOpen)}
+              className="flex items-center justify-center gap-2 px-4 py-2 border rounded-lg min-w-[100px]"
+            >
+              <FunnelSimple size={20} />
+              <span className="hidden md:inline">Filters</span>
+            </button>
           </div>
         </div>
 
