@@ -232,36 +232,47 @@ export const ProductList = () => {
           </div>
         )}
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {loading
-            ? // Loading skeleton
-              Array(8)
-                .fill(0)
-                .map((_, i) => (
-                  <div key={i} className="animate-pulse">
-                    <div className="bg-gray-200 aspect-square rounded-lg mb-4"></div>
-                    <div className="bg-gray-200 h-4 w-2/3 mb-2 rounded"></div>
-                    <div className="bg-gray-200 h-4 w-1/3 rounded"></div>
-                  </div>
-                ))
-            : products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-        </div>
-
-        {/* Load More Button */}
-        {hasMore && (
-          <div className="mt-8 md:mt-12 text-center">
-            <button
-              onClick={() => fetchProducts(endCursor)}
-              disabled={loading}
-              className="w-full md:w-auto px-8 py-3 bg-black text-white rounded-lg hover:bg-gray-900 transition-colors"
-            >
-              {loading ? "Loading..." : "Load More"}
-            </button>
+        {/* Products Grid with Minimum Height */}
+        <div className="min-h-[800px]">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            {loading
+              ? // Loading skeleton with same layout as products
+                Array(12)
+                  .fill(0)
+                  .map((_, i) => (
+                    <div key={i} className="flex flex-col">
+                      <div className="aspect-square bg-gray-200 rounded-lg mb-4 animate-pulse" />
+                      <div className="space-y-2 p-4">
+                        <div className="h-4 bg-gray-200 rounded w-3/4 animate-pulse" />
+                        <div className="h-4 bg-gray-200 rounded w-1/4 animate-pulse" />
+                      </div>
+                    </div>
+                  ))
+              : products.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
           </div>
-        )}
+
+          {/* Load More Section with Fixed Height */}
+          <div className="h-20 mt-8 md:mt-12 flex items-center justify-center">
+            {hasMore && (
+              <button
+                onClick={() => fetchProducts(endCursor)}
+                disabled={loading}
+                className="w-full md:w-auto px-8 py-3 bg-black text-white rounded-lg hover:bg-gray-900 transition-colors disabled:opacity-50"
+              >
+                {loading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    Loading...
+                  </div>
+                ) : (
+                  "Load More"
+                )}
+              </button>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
