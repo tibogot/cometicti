@@ -10,7 +10,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <Link to={`/product/${product.handle}`} className="group w-full">
-      <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-4">
+      <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-4 select-none">
         {product.images[0] &&
           (isGLB ? (
             <div className="w-full h-full flex items-center justify-center">
