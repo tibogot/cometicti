@@ -2,91 +2,72 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
-    <footer className="w-full bg-black text-white py-20">
-      <div className="w-full px-8">
-        {" "}
-        {/* Changed from just px-8 */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-12">
-          {" "}
-          {/* Added w-full */}
-          {/* Brand Column */}
-          <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-bold font-neue">COSMETIC</h2>
-            <p className="text-white/80">
-              Natural and organic cosmetics for your daily beauty routine.
-            </p>
+    <footer className="bg-black text-white py-12 md:py-20">
+      <div className="px-4 md:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Navigation Links */}
+          <div>
+            <h3 className="text-lg font-bold mb-4">Navigation</h3>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="/"
+                  className="text-white/80 hover:text-white transition-colors"
+                >
+                  Home
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/shop"
+                  className="text-white/80 hover:text-white transition-colors"
+                >
+                  Shop
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/about"
+                  className="text-white/80 hover:text-white transition-colors"
+                >
+                  About
+                </a>
+              </li>
+            </ul>
           </div>
-          {/* Quick Links */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-lg font-bold font-neue mb-2">Quick Links</h3>
-            <Link
-              to="/"
-              className="text-white/80 hover:text-white transition-colors"
-            >
-              Home
-            </Link>
-            <Link
-              to="/shop"
-              className="text-white/80 hover:text-white transition-colors"
-            >
-              Shop
-            </Link>
-            <Link
-              to="/about"
-              className="text-white/80 hover:text-white transition-colors"
-            >
-              About
-            </Link>
-            <a
-              href="#"
-              className="text-white/80 hover:text-white transition-colors"
-            >
-              Contact
-            </a>
-          </div>
-          {/* Legal */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-lg font-bold font-neue mb-2">Legal</h3>
-            <a
-              href="#"
-              className="text-white/80 hover:text-white transition-colors"
-            >
-              Privacy Policy
-            </a>
-            <a
-              href="#"
-              className="text-white/80 hover:text-white transition-colors"
-            >
-              Terms of Service
-            </a>
-            <a
-              href="#"
-              className="text-white/80 hover:text-white transition-colors"
-            >
-              Shipping Policy
-            </a>
-          </div>
+
           {/* Newsletter */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-lg font-bold font-neue mb-2">Newsletter</h3>
-            <p className="text-white/80">
-              Subscribe to our newsletter for updates and exclusive offers.
-            </p>
-            <div className="flex gap-2">
+          <div>
+            <h3 className="text-lg font-bold mb-4">Stay Updated</h3>
+            <p className="text-white/80 mb-4">Subscribe to our newsletter</p>
+            <form className="flex gap-2">
               <input
                 type="email"
-                placeholder="Your email"
-                className="bg-white/10 px-4 py-2 rounded-lg flex-grow text-white placeholder:text-white/50"
+                placeholder="Enter your email"
+                className="px-4 py-2 rounded-lg bg-white/10 text-white placeholder:text-white/50 flex-1"
               />
-              <button className="bg-white text-black px-4 py-2 rounded-lg font-neue hover:bg-white/90 transition-colors">
+              <button className="px-4 py-2 bg-white text-black rounded-lg hover:bg-white/90 transition-colors">
                 Subscribe
               </button>
-            </div>
+            </form>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="text-lg font-bold mb-4">Contact</h3>
+            <address className="not-italic text-white/80">
+              <p>1234 Street Name</p>
+              <p>City, State 12345</p>
+              <p>Email: info@cosmetic.com</p>
+              <p>Phone: (123) 456-7890</p>
+            </address>
           </div>
         </div>
-        {/* Copyright */}
-        <div className="w-full border-t border-white/10 mt-16 pt-8 text-center text-white/60">
-          <p>© 2024 COSMETIC. All rights reserved.</p>
+
+        <div className="mt-12 pt-8 border-t border-white/10 text-center text-white/60">
+          <p>
+            &copy; {new Date().getFullYear()} Cosmetic. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
