@@ -17,7 +17,7 @@ export const AboutPage = () => {
       </section>
 
       {/* Content Section */}
-      <section className="w-full bg-white py-20 flex-grow">
+      <section className="w-full bg-red-600 py-20 flex-grow">
         <div className="px-8">
           <div className="prose prose-lg w-full">
             <p>
