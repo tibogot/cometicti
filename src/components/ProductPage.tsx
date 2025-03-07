@@ -113,17 +113,22 @@ export const ProductPage = () => {
         <div className="mx-auto px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Loading skeleton */}
-            <div className="flex gap-4 h-[600px]">
-              <div className="w-24 space-y-2">
-                {[1, 2, 3].map((i) => (
+            <div className="flex flex-col md:flex-row gap-4">
+              {/* Main Image Skeleton */}
+              <div className="order-1 md:order-2 aspect-square bg-gray-200 rounded-lg animate-pulse flex-1" />
+
+              {/* Thumbnails Skeleton */}
+              <div className="order-2 md:order-1 grid grid-cols-4 md:grid-cols-1 gap-2 w-full md:w-24">
+                {[1, 2, 3, 4].map((i) => (
                   <div
                     key={i}
-                    className="w-24 h-24 bg-gray-200 rounded-lg animate-pulse"
+                    className="aspect-square bg-gray-200 rounded-lg animate-pulse"
                   />
                 ))}
               </div>
-              <div className="flex-1 aspect-square bg-gray-200 rounded-lg animate-pulse" />
             </div>
+
+            {/* Content Skeleton */}
             <div className="space-y-6">
               <div className="h-10 bg-gray-200 rounded w-3/4 animate-pulse" />
               <div className="h-8 bg-gray-200 rounded w-1/4 animate-pulse" />
