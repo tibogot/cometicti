@@ -162,12 +162,12 @@ export const ProductPage = () => {
 
             {/* Thumbnail Images */}
             {!product?.images[0]?.src.endsWith(".glb") && (
-              <div className="order-2 md:order-1 flex flex-row md:flex-col gap-2 select-none">
+              <div className="order-2 md:order-1 grid grid-cols-4 md:grid-cols-1 gap-2 select-none w-full md:w-24">
                 {product?.images.slice(0, 4).map((image, index) => (
                   <button
                     key={image.id}
                     onClick={() => setSelectedImage(index)}
-                    className={`w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-colors bg-white ${
+                    className={`aspect-square rounded-lg overflow-hidden border-2 transition-colors bg-white ${
                       selectedImage === index
                         ? "border-black"
                         : "border-transparent hover:border-gray-300"
