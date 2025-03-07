@@ -38,7 +38,7 @@ export const HomePage = () => {
         style={{ height: "calc(100svh - 4rem)" }}
       >
         <img
-          src="/heroimg.avif"
+          src="/heroimg.avif" // This will now look in the public folder
           alt="Hero"
           loading="eager"
           fetchPriority="high"
